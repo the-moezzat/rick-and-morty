@@ -6,15 +6,18 @@ interface ICharacterCard {
     id: number
     name: string,
     imageUrl: string,
-    spices: string,
+    species: string,
     gender: string,
     status: string
 }
 
 const Img = styled("img")({
-    width: "150px", height: "100px", objectFit: "cover", borderRadius: "16px"
+    width: "150px",
+    height: "100px",
+    objectFit: "cover",
+    borderRadius: "16px"
 });
-export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, status, spices, name}) => {
+export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, status, species, name}) => {
     return (
         <Card
             sx={{display: "flex", gap: "10px", backgroundColor: "transparent"}}
@@ -41,12 +44,12 @@ export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, s
                     </Typography>
                 </Stack>
                 <Typography paragraph mb={0}>
-                    Species: {spices}
+                    Species: {species}
                 </Typography>
             </CardContent>
             <CardActions sx={{ml: "auto", alignSelf: "flex-start"}}>
                 <Link to={`/character/${id}`}>
-                    <Button variant="text" size="small" sx={{fontWeight: 'bold'}}>
+                    <Button variant="text" size="small" sx={{fontWeight: "bold"}}>
                         Explore
                     </Button>
                 </Link>
