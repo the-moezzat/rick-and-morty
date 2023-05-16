@@ -5,19 +5,16 @@ import {
     MenuItem,
     Select,
     SelectChangeEvent,
-    SxProps,
-    Theme
 } from "@mui/material";
 
 interface IProps {
     label: string;
-    size?: "small" | "medium";
     items: { [key: string]: string };
     onChange?: (e: SelectChangeEvent) => void;
-    sx?: SxProps<Theme> | undefined;
+
 }
 
-export const Dropdown: React.FC<IProps> = ({label, items, onChange, sx, size}) => {
+export const Dropdown: React.FC<IProps> = ({label, items, onChange}) => {
     const [value, setValue] = useState('')
     const handleChange = (e: SelectChangeEvent) => {
         setValue(e.target.value)
@@ -26,10 +23,12 @@ export const Dropdown: React.FC<IProps> = ({label, items, onChange, sx, size}) =
         }
     }
     const itemKeys = Object.keys(items);
-    const options = itemKeys.map((key) => (<MenuItem value={key} key={key}>{items[key]}</MenuItem>));
+    const options = itemKeys.map((key) => <MenuItem value={key} key={key}>{items[key]}</MenuItem>);
     return <>
 
-        <FormControl sx={sx} size={size}>
+        <FormControl sx={{
+            minWidth: '120px'
+        }} size={"small"}>
             <InputLabel id={label}>{label}</InputLabel>
             <Select
                 labelId={label}
