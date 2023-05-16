@@ -3,15 +3,20 @@ import {Search} from "./Search";
 import {Dropdown} from "./Dropdown";
 import {CharacterCardSkeleton} from "../characterCard/CharacterCardSkeleton";
 import {CharacterCard} from "../characterCard/CharacterCard";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useGetCharactersQuery} from "../../store";
 import {useCharacterSearch} from "../../hooks/useCharacterSearch";
+import {useInfiniteScroll} from "../../hooks/useInfiniteScroll";
 
 export const Sidebar = () => {
-    const [{status, gender, name, fetching}, {handleStatusChange, handleNameChange, handleGenderChange, handleFetchingChange}] = useCharacterSearch()
+    const [{status, gender, name, fetching}, {
+        handleStatusChange,
+        handleNameChange,
+        handleGenderChange,
+        handleFetchingChange
+    }] = useCharacterSearch();
     const [page, setPage] = useState<number>(1);
     const [characters, setCharacters] = useState<any[]>([]);
-
 
     const {
         data: charactersData,
@@ -30,8 +35,26 @@ export const Sidebar = () => {
 
     useEffect(() => {
         data && setCharacters((characters) => [...characters, ...data]);
-        handleFetchingChange(false)
+        handleFetchingChange(false);
     }, [data]);
+
+    const {observe, unobserve} = useInfiniteScroll(() => {
+        setPage((prevPage) => prevPage + 1);
+    });
+
+    const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (sentinelRef.current) {
+            observe(sentinelRef.current);
+        }
+
+        return () => {
+            if (sentinelRef.current) {
+                unobserve(sentinelRef.current);
+            }
+        };
+    }, [observe, unobserve]);
 
     return (
         <>
@@ -40,9 +63,9 @@ export const Sidebar = () => {
             </Typography>
             <Search onChange={(e) => {
                 handleNameChange(e.target.value);
-                setPage(1)
-                setCharacters([])
-                handleFetchingChange(true)
+                setPage(1);
+                setCharacters([]);
+                handleFetchingChange(true);
             }}/>
             <Dropdown
                 label={"Status"}
@@ -53,9 +76,9 @@ export const Sidebar = () => {
                 }}
                 onChange={(e) => {
                     handleStatusChange(e.target.value);
-                    setPage(1)
-                    setCharacters([])
-                    handleFetchingChange(true)
+                    setPage(1);
+                    setCharacters([]);
+                    handleFetchingChange(true);
                 }}
             />
             <Dropdown
@@ -67,45 +90,41 @@ export const Sidebar = () => {
                 }}
                 onChange={(e) => {
                     handleGenderChange(e.target.value);
-                    setPage(1)
-                    setCharacters([])
-                    handleFetchingChange(true)
+                    setPage(1);
+                    setCharacters([]);
+                    handleFetchingChange(true);
                 }}
             />
             <Stack
-                divider={<Divider variant="inset" />}
+                divider={<Divider variant="inset"/>}
                 spacing={1}
-                sx={{ height: '80%', overflowY: 'auto' }}
+                sx={{height: "80%", overflowY: "auto"}}
             >
                 {isLoading || fetching ? (
                     <CharacterCardSkeleton count={5}/>
                 ) : error ? (
                     <p>error</p>
                 ) : (
-                    characters.map((character) => (
-                        <CharacterCard
-                            id={character.id}
-                            key={character.id}
-                            name={character.name}
-                            imageUrl={character.image}
-                            gender={character.gender}
-                            species={character.species}
-                            status={character.status}
-                        />
-                    ))
+                    <>
+                        {characters.map((character) => (
+                            <CharacterCard
+                                id={character.id}
+                                key={character.id}
+                                name={character.name}
+                                imageUrl={character.image}
+                                gender={character.gender}
+                                species={character.species}
+                                status={character.status}
+                            />
+                        ))}
+                    </>
                 )}
                 {isFetching ? (
                     <>
-                        <CharacterCardSkeleton count={3} />
+                        <CharacterCardSkeleton count={3}/>
                     </>
                 ) : (
-                    <Button
-                        onClick={() => {
-                            setPage(page + 1);
-                        }}
-                    >
-                        Load More
-                    </Button>
+                    <div ref={sentinelRef}></div>
                 )}
                 {/*<Pagination*/}
                 {/*    count={charactersData?.info.pages}*/}

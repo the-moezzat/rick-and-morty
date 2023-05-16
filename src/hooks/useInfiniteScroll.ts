@@ -42,8 +42,6 @@ export const useInfiniteScroll = (
             observer.current.observe(target);
         }
     };
-
-    const text = "filtration"
     const unobserve = (target: Element | null) => {
         if (observer.current && target) {
             observer.current.unobserve(target);
