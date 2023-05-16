@@ -1,4 +1,4 @@
-import {Divider, Stack, Typography} from "@mui/material";
+import {Box, Divider, Stack, Typography} from "@mui/material";
 import {Search} from "./Search";
 import {Dropdown} from "./Dropdown";
 import {CharacterCardSkeleton} from "../characterCard/CharacterCardSkeleton";
@@ -61,7 +61,7 @@ export const Sidebar = () => {
 
     return (
         <>
-            <Typography variant={"h2"} fontWeight={"bold"} color={"#212529"} fontSize={"28px"}>
+            <Typography variant={"h2"} fontWeight={"bold"} color={"#212529"} fontSize={"32px"} mb={3}>
                 Explore Rick & Morty characters
             </Typography>
             <Search onChange={(e) => {
@@ -69,44 +69,64 @@ export const Sidebar = () => {
                 setPage(1);
                 setCharacters([]);
                 handleFetchingChange(true);
-            }}/>
-            <Dropdown
-                label={"Status"}
-                items={{
-                    alive: "Alive",
-                    dead: "Dead",
-                    unknown: "unknown"
-                }}
-                onChange={(e) => {
-                    handleStatusChange(e.target.value);
-                    setPage(1);
-                    setCharacters([]);
-                    handleFetchingChange(true);
-                }}
+            }}
+                    sx={{mb: 2, backgroundColor: '#fff'}}
             />
-            <Dropdown
-                label={"Gender"}
-                items={{
-                    male: "Male",
-                    female: "Female",
-                    unknown: "unknown"
+            <Box
+                sx={{
+                    display: "flex",
+                    gap: "18px",
+                    alignItems: "start",
+                    mb: 4,
                 }}
-                onChange={(e) => {
-                    handleGenderChange(e.target.value);
-                    setPage(1);
-                    setCharacters([]);
-                    handleFetchingChange(true);
-                }}
-            />
+            >
+                <Typography
+                    variant="body1"
+                    color="#212529"
+                    fontWeight="bold"
+                    fontSize={"18px"}
+                >
+                    Filter
+                </Typography>
+                <Dropdown
+                    label={"Status"}
+                    items={{
+                        alive: "Alive",
+                        dead: "Dead",
+                        unknown: "unknown"
+                    }}
+                    onChange={(e) => {
+                        handleStatusChange(e.target.value);
+                        setPage(1);
+                        setCharacters([]);
+                        handleFetchingChange(true);
+                    }}
+                />
+                <Dropdown
+                    label={"Gender"}
+                    items={{
+                        male: "Male",
+                        female: "Female",
+                        unknown: "unknown"
+                    }}
+                    onChange={(e) => {
+                        handleGenderChange(e.target.value);
+                        setPage(1);
+                        setCharacters([]);
+                        handleFetchingChange(true);
+                    }}
+                />
+            </Box>
             <Stack
-                divider={<Divider variant="middle"/>}
+                divider={<Divider variant="inset" />}
                 spacing={1}
-                sx={{height: "90%", overflowY: "auto"}}
+                pb={3}
+                sx={{ height: '72%', overflowY: 'auto' }}
             >
                 {isLoading || fetching ? (
                     <CharacterCardSkeleton count={5}/>
                 ) : error ? (
-                    <p>something gone wrong</p>
+                    <Typography variant={"body1"} textAlign={"center"} fontSize={28} fontWeight={"bold"}> Something gone wrong field to load characters</Typography>
                 ) : (
                     data.length ?
                         characters.map((character) => (
@@ -120,7 +140,7 @@ export const Sidebar = () => {
                                 status={character.status}
                             />
                         )) :
-                        <p>Can't found "{name}"</p>
+                        <Typography variant={"body1"} textAlign={"center"} fontSize={28} fontWeight={"bold"}>Can't found "{name}"</Typography>
 
                 )}
                 {next && (isFetching ? (

@@ -27,7 +27,8 @@ export const Dropdown: React.FC<IProps> = ({label, items, onChange}) => {
     return <>
 
         <FormControl sx={{
-            minWidth: '120px'
+            minWidth: '120px',
+            backgroundColor: '#fff'
         }} size={"small"}>
             <InputLabel id={label}>{label}</InputLabel>
             <Select
