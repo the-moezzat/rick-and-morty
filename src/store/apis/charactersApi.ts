@@ -1,41 +1,8 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {Characters, CompleteCharacter} from "../../types/characterTypes";
 
 const BASE_URL = "https://rickandmortyapi.com/graphql";
 
-interface BasicCharacter {
-    id: number;
-    name: string;
-    image: string;
-    status: string;
-    species: string;
-    gender: string;
-}
-
-interface Episode {
-    id: number;
-    name: number;
-    air_date: string;
-    episode: string;
-}
-
-interface CompleteCharacter extends BasicCharacter {
-    type: string;
-    origin: {
-        name: string;
-    };
-    location: {
-        name: string;
-    };
-    episode: Episode[];
-}
-
-interface Characters {
-    info: {
-        pages: number;
-        next: number | null;
-    };
-    results: BasicCharacter[];
-}
 
 type ReturnCharacters = {
     data: {

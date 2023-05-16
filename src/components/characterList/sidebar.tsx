@@ -1,4 +1,4 @@
-import {Button, Divider, Stack, Typography} from "@mui/material";
+import {Divider, Stack, Typography} from "@mui/material";
 import {Search} from "./Search";
 import {Dropdown} from "./Dropdown";
 import {CharacterCardSkeleton} from "../characterCard/CharacterCardSkeleton";
@@ -7,6 +7,7 @@ import {useEffect, useRef, useState} from "react";
 import {useGetCharactersQuery} from "../../store";
 import {useCharacterSearch} from "../../hooks/useCharacterSearch";
 import {useInfiniteScroll} from "../../hooks/useInfiniteScroll";
+import {BasicCharacter} from "../../types/characterTypes";
 
 export const Sidebar = () => {
     const [{status, gender, name, fetching}, {
@@ -16,7 +17,7 @@ export const Sidebar = () => {
         handleFetchingChange
     }] = useCharacterSearch();
     const [page, setPage] = useState<number>(1);
-    const [characters, setCharacters] = useState<any[]>([]);
+    const [characters, setCharacters] = useState<BasicCharacter[]>([]);
 
     const {
         data: charactersData,
@@ -30,13 +31,15 @@ export const Sidebar = () => {
         status,
     });
 
-    const data = charactersData?.results;
+    const next = charactersData && charactersData.info.next;
+    const data = charactersData?.results || [];
 
 
     useEffect(() => {
-        data && setCharacters((characters) => [...characters, ...data]);
-        handleFetchingChange(false);
-    }, [data]);
+            data && setCharacters((characters) => [...characters, ...data]);
+            handleFetchingChange(false);
+        },
+        [data]);
 
     const {observe, unobserve} = useInfiniteScroll(() => {
         setPage((prevPage) => prevPage + 1);
@@ -96,17 +99,17 @@ export const Sidebar = () => {
                 }}
             />
             <Stack
-                divider={<Divider variant="inset"/>}
+                divider={<Divider variant="middle"/>}
                 spacing={1}
-                sx={{height: "80%", overflowY: "auto"}}
+                sx={{height: "90%", overflowY: "auto"}}
             >
                 {isLoading || fetching ? (
                     <CharacterCardSkeleton count={5}/>
                 ) : error ? (
-                    <p>error</p>
+                    <p>something gone wrong</p>
                 ) : (
-                    <>
-                        {characters.map((character) => (
+                    data.length ?
+                        characters.map((character) => (
                             <CharacterCard
                                 id={character.id}
                                 key={character.id}
@@ -116,22 +119,17 @@ export const Sidebar = () => {
                                 species={character.species}
                                 status={character.status}
                             />
-                        ))}
-                    </>
+                        )) :
+                        <p>Can't found "{name}"</p>
+
                 )}
-                {isFetching ? (
+                {next && (isFetching ? (
                     <>
                         <CharacterCardSkeleton count={3}/>
                     </>
                 ) : (
                     <div ref={sentinelRef}></div>
-                )}
-                {/*<Pagination*/}
-                {/*    count={charactersData?.info.pages}*/}
-                {/*    onChange={(_, page) => {*/}
-                {/*        setPage(page);*/}
-                {/*    }}*/}
-                {/*/>*/}
+                ))}
             </Stack>
         </>
     );

@@ -1,5 +1,5 @@
 
-import {Sidebar} from "./components/characterList/sidebar";
+import {Sidebar} from "./characterList/sidebar";
 
 function App() {
     return (

@@ -25,7 +25,7 @@ export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, s
         >
             <CardMedia>
                 <Img
-
+                    loading={"lazy"}
                     src={imageUrl}
                     alt={name}
                 />
