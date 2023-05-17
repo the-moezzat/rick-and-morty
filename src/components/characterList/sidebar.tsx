@@ -61,7 +61,17 @@ export const Sidebar = () => {
 
     return (
         <>
-            <Typography variant={"h2"} fontWeight={"bold"} color={"#212529"} fontSize={"32px"} mb={3}>
+            <Typography variant={"h2"} sx={{
+                fontSize: {
+                    xs: "2rem",
+                    sm: "2.4rem",
+                    md: "2.8rem",
+                    lg: "3.2rem",
+                },
+                mb: 3,
+                color: '#212529',
+                fontWeight: 'bold',
+            }}>
                 All characters
             </Typography>
             <Search onChange={(e) => {

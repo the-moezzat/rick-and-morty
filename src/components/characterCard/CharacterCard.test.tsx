@@ -43,9 +43,9 @@ describe("Character card component", () => {
 
         // Assert that the component is rendered
         expect(screen.getByRole("heading", {name})).toBeInTheDocument();
-        expect(screen.getByText(`Status: ${status}`)).toBeInTheDocument();
-        expect(screen.getByText(`Gender: ${gender}`)).toBeInTheDocument();
-        expect(screen.getByText(`Species: ${species}`)).toBeInTheDocument();
+        expect(screen.getByText(status)).toBeInTheDocument();
+        expect(screen.getByText(gender)).toBeInTheDocument();
+        expect(screen.getByText(species)).toBeInTheDocument();
     });
 
     test("clicking the button navigates to the character page with the correct ID in the URL", async () => {

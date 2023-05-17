@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Card, CardActions, CardContent, CardMedia, Stack, styled, Typography} from "@mui/material";
+import {Button, Card, CardActions, CardContent, CardMedia, Stack, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 
 interface ICharacterCard {
@@ -11,12 +11,6 @@ interface ICharacterCard {
     status: string
 }
 
-const Img = styled("img")({
-    width: "150px",
-    height: "100px",
-    objectFit: "cover",
-    borderRadius: "16px"
-});
 export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, status, species, name}) => {
     return (
         <div>
@@ -24,28 +18,31 @@ export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, s
                 sx={{display: "flex", gap: "10px", backgroundColor: "transparent"}}
                 elevation={0}
             >
-                <CardMedia>
-                    <Img
-                        loading={"lazy"}
-                        src={imageUrl}
-                        alt={name}
-                    />
-                </CardMedia>
+                <CardMedia image={imageUrl} title={name} component={"img"} sx={{
+                    width: "150px",
+                    height: "100px",
+                    borderRadius: "16px"
+                }}/>
                 <CardContent sx={{padding: "0px"}}>
-                    <Typography variant="h5" mb={"8px"}>
+                    <Typography gutterBottom variant="h5" color={"#343a40"}>
                         {name}
                     </Typography>
 
-                    <Stack direction="row" spacing={2} mb={"4px"}>
-                        <Typography paragraph mb={0}>
-                            Status: {status}
+                    <Stack direction="row" spacing={2}>
+                        <Typography color={"#868e96"}>
+                            <Typography variant={"body1"} component={"span"}
+                                        color={"#343a40"}>Status:</Typography> {status}
                         </Typography>
-                        <Typography paragraph mb={0}>
-                            Gender: {gender}
+                        <Typography color={"#868e96"}>
+                            <Typography variant={"body1"} component={"span"} color={"#343a40"}>
+                                Gender:
+                            </Typography> {gender}
                         </Typography>
                     </Stack>
-                    <Typography paragraph mb={0}>
-                        Species: {species}
+                    <Typography color={"#868e96"}>
+                        <Typography variant={"body1"} component={"span"} color={"#343a40"}>
+                            Species:
+                        </Typography> {species}
                     </Typography>
                 </CardContent>
                 <CardActions sx={{ml: "auto", alignSelf: "flex-start"}}>

@@ -1,6 +1,6 @@
 import {LoaderFunction, useLoaderData} from "react-router-dom";
 import {useGetCharacterByIdQuery} from "../../store";
-import {Chip, Stack, Typography} from "@mui/material";
+import {Box, Chip, Stack, Typography} from "@mui/material";
 import {EpisodeTable} from "./EpisodeTable";
 import {CharacterDetailsSkeleton} from "./CharacterDetailsSkeleton";
 
@@ -13,7 +13,7 @@ export const CharacterDetails = () => {
     const {data, isFetching, error} = useGetCharacterByIdQuery(id);
 
     return (
-        <>
+        <Box>
             {isFetching ?
                 <CharacterDetailsSkeleton/> :
                 error ?
@@ -77,6 +77,6 @@ export const CharacterDetails = () => {
                             <EpisodeTable episodes={data.episode}/>
                         </>))
             }
-        </>
+        </Box>
     );
 };
