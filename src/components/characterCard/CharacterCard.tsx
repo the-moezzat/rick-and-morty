@@ -18,13 +18,15 @@ export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, s
         <div>
             <Card
                 sx={{
-                    display:  "flex",
+                    display: "flex",
                     flexDirection: {
                         md: "row", xs: "column"
                     },
                     alignItems: "start",
                     justifyContent: "space-between",
-                    backgroundColor: "transparent"}}
+                    backgroundColor: "transparent",
+                    width: "100%"
+                }}
                 elevation={0}
             >
                 <Stack direction={"row"} spacing={{md: 2, xs: 1}}>
@@ -33,7 +35,7 @@ export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, s
                         height: {md: "100px", xs: "80px"},
                         borderRadius: "16px"
                     }}/>
-                    <CardContent sx={{padding: 0}} >
+                    <CardContent sx={{padding: 0}}>
                         <Typography mb={{md: 2, xs: 0}} variant="h5" color={"#343a40"}>
                             {name}
                         </Typography>
@@ -57,7 +59,7 @@ export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, s
                     </CardContent>
                 </Stack>
 
-                <CardActions sx={{width: "100%"}}>
+                <CardActions>
                     <Link to={`/character/${id}`}>
                         <Button variant="outlined" size="small" onClick={() => {
                             openDrawer(true);

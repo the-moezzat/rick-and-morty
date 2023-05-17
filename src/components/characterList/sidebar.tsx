@@ -64,9 +64,8 @@ export const Sidebar = () => {
             <Typography variant={"h2"} sx={{
                 fontSize: {
                     xs: "1.8rem",
-                    md: "2.8rem",
-                    lg: "3.2rem",
-                },
+                    md: "2.4rem",
+                                    },
                 mb: {
                     md: 2,
                     xs: 1
