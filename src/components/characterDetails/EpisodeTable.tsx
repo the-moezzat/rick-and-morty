@@ -1,5 +1,5 @@
 import React from "react";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from "@mui/material";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {Episode} from "../../types/characterTypes";
 
 interface IProps {
@@ -39,15 +39,6 @@ export const EpisodeTable: React.FC<IProps> = ({episodes}) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                {/*<TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />*/}
             </Paper>
         </>
     );
