@@ -6,11 +6,13 @@ import {Provider} from "react-redux";
 import {store} from "./store";
 import './index.css'
 import {CharacterDetails, loader as characterLoader} from "./components/characterDetails/CharacterDetails";
+import Index from './components/router';
 
 const router = createBrowserRouter([{
     path: "/",
     element: <App/>,
     children: [
+        {index: true, element: <Index/>},
         {
             path: "/character/:characterId",
             loader: characterLoader,
