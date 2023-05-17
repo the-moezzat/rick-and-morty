@@ -4,6 +4,8 @@ import App from "./components/App.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store";
+import './index.css'
+import {CharacterDetails, loader as characterLoader} from "./components/characterDetails/CharacterDetails";
 
 const router = createBrowserRouter([{
     path: "/",
@@ -11,7 +13,8 @@ const router = createBrowserRouter([{
     children: [
         {
             path: "/character/:characterId",
-            element: ""
+            loader: characterLoader,
+            element: <CharacterDetails/>
         }
     ]
 }]);

@@ -13,6 +13,7 @@ function App() {
                     margin: '0 auto',
                     alignItems: 'center',
                     height: '100vh',
+                    px: '14px'
                 }}
             >
                 <Box
@@ -30,7 +31,7 @@ function App() {
                             gridColumn: 'span 7',
                             overflowY: 'hidden',
                             borderRadius: '24px',
-                            height: '600px',
+                            height: '640px',
                             backgroundColor: '#f8f9fa',
                             pt: 2,
                             pb: 8,
