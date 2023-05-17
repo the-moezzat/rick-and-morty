@@ -13,43 +13,55 @@ interface ICharacterCard {
 }
 
 export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, status, species, name}) => {
-    const {openDrawer} = useDrawer()
+    const {openDrawer} = useDrawer();
     return (
         <div>
             <Card
-                sx={{display: "flex", gap: "10px", backgroundColor: "transparent"}}
+                sx={{
+                    display:  "flex",
+                    flexDirection: {
+                        md: "row", xs: "column"
+                    },
+                    alignItems: "start",
+                    justifyContent: "space-between",
+                    backgroundColor: "transparent"}}
                 elevation={0}
             >
-                <CardMedia image={imageUrl} title={name} component={"img"} sx={{
-                    width: "150px",
-                    height: "100px",
-                    borderRadius: "16px"
-                }}/>
-                <CardContent sx={{padding: "0px"}}>
-                    <Typography gutterBottom variant="h5" color={"#343a40"}>
-                        {name}
-                    </Typography>
-
-                    <Stack direction="row" spacing={2}>
-                        <Typography color={"#868e96"}>
-                            <Typography variant={"body1"} component={"span"}
-                                        color={"#343a40"}>Status:</Typography> {status}
+                <Stack direction={"row"} spacing={{md: 2, xs: 1}}>
+                    <CardMedia image={imageUrl} title={name} sx={{
+                        width: {md: "150px", xs: "100px"},
+                        height: {md: "100px", xs: "80px"},
+                        borderRadius: "16px"
+                    }}/>
+                    <CardContent sx={{padding: 0}} >
+                        <Typography mb={{md: 2, xs: 0}} variant="h5" color={"#343a40"}>
+                            {name}
                         </Typography>
+
+                        <Stack direction="row" spacing={{md: 2, xs: 1}}>
+                            <Typography color={"#868e96"}>
+                                <Typography variant={"body1"} component={"span"}
+                                            color={"#343a40"}>Status:</Typography> {status}
+                            </Typography>
+                            <Typography color={"#868e96"}>
+                                <Typography variant={"body1"} component={"span"} color={"#343a40"}>
+                                    Gender:
+                                </Typography> {gender}
+                            </Typography>
+                        </Stack>
                         <Typography color={"#868e96"}>
                             <Typography variant={"body1"} component={"span"} color={"#343a40"}>
-                                Gender:
-                            </Typography> {gender}
+                                Species:
+                            </Typography> {species}
                         </Typography>
-                    </Stack>
-                    <Typography color={"#868e96"}>
-                        <Typography variant={"body1"} component={"span"} color={"#343a40"}>
-                            Species:
-                        </Typography> {species}
-                    </Typography>
-                </CardContent>
-                <CardActions sx={{ml: "auto", alignSelf: "flex-start"}}>
+                    </CardContent>
+                </Stack>
+
+                <CardActions sx={{width: "100%"}}>
                     <Link to={`/character/${id}`}>
-                        <Button variant="outlined" size="small" onClick={() => {openDrawer(true)}}>
+                        <Button variant="outlined" size="small" onClick={() => {
+                            openDrawer(true);
+                        }}>
                             Explore
                         </Button>
                     </Link>

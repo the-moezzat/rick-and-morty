@@ -10,7 +10,10 @@ export const EpisodeTable: React.FC<IProps> = ({episodes}) => {
     return (
         <>
             <Paper sx={{width: "100%", overflow: "hidden", borderRadius: "8px"}} elevation={2}>
-                <TableContainer sx={{maxHeight: 330}}>
+                <TableContainer sx={{maxHeight: {
+                    md: 330,
+                    xs: 300
+                    }}}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>

@@ -47,8 +47,8 @@ export default function CharacterDrawer({children}: Props) {
             <Global
                 styles={{
                     ".MuiDrawer-root > .MuiPaper-root": {
-                        height: `calc(95% - ${drawerBleeding}px)`,
-                        overflow: "visible",
+                        height: `calc(98% - ${drawerBleeding}px)`,
+                        overflow: "scroll",
                     },
                 }}
             />

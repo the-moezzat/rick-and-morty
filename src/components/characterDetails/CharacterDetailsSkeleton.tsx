@@ -3,8 +3,11 @@ import {Skeleton, Stack, Typography} from "@mui/material";
 export const CharacterDetailsSkeleton = () => {
     return (
         <>
-            <Stack direction={"row"} spacing={2} mb={2}>
-                <Skeleton width={"250px"} height={"250px"} variant={"rounded"} sx={{borderRadius: '14px'}}/>
+            <Stack direction={{
+                xs: "column",
+                md: "row"
+            }} spacing={2} mb={2}>
+                <Skeleton width={"250px"} height={"250px"} variant={"rounded"} sx={{borderRadius: '14px', alignSelf: "center"}}/>
                 <Stack spacing={"8px"}>
                     <Stack direction={"row"} alignItems={"center"} mb={1} spacing={2}>
                         <Skeleton width={200} height={30} variant={"rounded"}/>

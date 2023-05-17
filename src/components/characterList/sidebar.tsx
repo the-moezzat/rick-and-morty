@@ -63,14 +63,16 @@ export const Sidebar = () => {
         <>
             <Typography variant={"h2"} sx={{
                 fontSize: {
-                    xs: "2rem",
-                    sm: "2.4rem",
+                    xs: "1.8rem",
                     md: "2.8rem",
                     lg: "3.2rem",
                 },
-                mb: 3,
-                color: '#212529',
-                fontWeight: 'bold',
+                mb: {
+                    md: 2,
+                    xs: 1
+                },
+                color: "#212529",
+                fontWeight: "bold",
             }}>
                 All characters
             </Typography>
@@ -80,21 +82,29 @@ export const Sidebar = () => {
                 setCharacters([]);
                 handleFetchingChange(true);
             }}
-                    sx={{mb: 2, backgroundColor: '#fff'}}
+                    sx={{mb: {
+                            md:2,
+                            xs: 1
+                        }, backgroundColor: "#fff"}}
             />
             <Box
                 sx={{
                     display: "flex",
-                    gap: "18px",
+                    gap: {
+                        md:"18px",
+                    xs: "10px"},
                     alignItems: "start",
-                    mb: 4,
+                    mb: {
+                        md:2,
+                        xs: 1
+                    },
                 }}
             >
                 <Typography
                     variant="body1"
                     color="#212529"
                     fontWeight="bold"
-                    fontSize={"18px"}
+                    fontSize={{md: "18px", xs: "16px"}}
                 >
                     Filter
                 </Typography>
@@ -128,15 +138,21 @@ export const Sidebar = () => {
                 />
             </Box>
             <Stack
-                divider={<Divider variant="inset" />}
+                divider={<Divider variant="fullWidth"/>}
                 spacing={1}
                 pb={3}
-                sx={{ height: '72%', overflowY: 'auto' }}
+                sx={{
+                    height: {
+                        md: "72%",
+                        xs: "85%"
+                    }, overflowY: "auto"
+                }}
             >
                 {isLoading || fetching ? (
                     <CharacterCardSkeleton count={5}/>
                 ) : error ? (
-                    <Typography variant={"body1"} textAlign={"center"} fontSize={28} fontWeight={"bold"}> Something gone wrong field to load characters</Typography>
+                    <Typography variant={"body1"} textAlign={"center"} fontSize={28} fontWeight={"bold"}> Something gone
+                        wrong field to load characters</Typography>
                 ) : (
                     data.length ?
                         characters.map((character) => (
@@ -150,7 +166,8 @@ export const Sidebar = () => {
                                 status={character.status}
                             />
                         )) :
-                        <Typography variant={"body1"} textAlign={"center"} fontSize={28} fontWeight={"bold"}>Can't found "{name}"</Typography>
+                        <Typography variant={"body1"} textAlign={"center"} fontSize={28} fontWeight={"bold"}>Can't found
+                            "{name}"</Typography>
 
                 )}
                 {next && (isFetching ? (

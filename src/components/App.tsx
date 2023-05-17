@@ -24,9 +24,7 @@ export default function App() {
                 <Grid
                     container
                     columns={16}
-
                     item
-
                 >
                     {!isSmallScreen && (
                         <Grid md={9} item>
@@ -48,7 +46,11 @@ export default function App() {
                             backgroundColor: "#f8f9fa",
                             pt: 2,
                             pb: 8,
-                            px: 2,
+                            px: {
+                                md: 2,
+                                xs: 0.5
+                            },
+
                         }}
                         item
                     >
