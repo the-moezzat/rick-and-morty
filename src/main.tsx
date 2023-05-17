@@ -7,10 +7,12 @@ import {store} from "./store";
 import './index.css'
 import {CharacterDetails, loader as characterLoader} from "./components/characterDetails/CharacterDetails";
 import Index from './components/router';
+import {Error} from "./components/router/Error";
 
 const router = createBrowserRouter([{
     path: "/",
     element: <App/>,
+    errorElement: <Error/>,
     children: [
         {index: true, element: <Index/>},
         {

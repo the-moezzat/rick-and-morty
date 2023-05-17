@@ -62,7 +62,7 @@ export const Sidebar = () => {
     return (
         <>
             <Typography variant={"h2"} fontWeight={"bold"} color={"#212529"} fontSize={"32px"} mb={3}>
-                Explore Rick & Morty characters
+                All characters
             </Typography>
             <Search onChange={(e) => {
                 handleNameChange(e.target.value);
