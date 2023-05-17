@@ -1,5 +1,5 @@
 import {Typography} from "@mui/material";
-import logo from '../../../public/logo.png'
+import logo from '../../assets/logo.png'
 export default function Index() {
     return (
         <>

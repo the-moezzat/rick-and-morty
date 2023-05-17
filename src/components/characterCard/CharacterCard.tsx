@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, Card, CardActions, CardContent, CardMedia, Stack, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
+import {useDrawer} from "../../hooks/useDrawer";
 
 interface ICharacterCard {
     id: number
@@ -12,6 +13,7 @@ interface ICharacterCard {
 }
 
 export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, status, species, name}) => {
+    const {openDrawer} = useDrawer()
     return (
         <div>
             <Card
@@ -47,7 +49,7 @@ export const CharacterCard: React.FC<ICharacterCard> = ({id, gender, imageUrl, s
                 </CardContent>
                 <CardActions sx={{ml: "auto", alignSelf: "flex-start"}}>
                     <Link to={`/character/${id}`}>
-                        <Button variant="outlined" size="small">
+                        <Button variant="outlined" size="small" onClick={() => {openDrawer(true)}}>
                             Explore
                         </Button>
                     </Link>
