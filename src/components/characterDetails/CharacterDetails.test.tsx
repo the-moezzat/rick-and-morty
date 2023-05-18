@@ -17,6 +17,8 @@ vi.mock("react-router-dom", async () => {
 
 describe("CharacterDetails loading and success", () => {
     test("renders loading skeleton when data is fetching", () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         useLoaderData.mockReturnValue({id: 1});
 
         render(
