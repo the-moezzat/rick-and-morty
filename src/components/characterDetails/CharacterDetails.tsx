@@ -127,7 +127,7 @@ export const CharacterDetails: React.FC = () => {
     if (error) {
         return (
             <ErrMessage variant="body1">
-                Something went wrong while trying to load characters
+                Something went wrong while trying to load character
             </ErrMessage>
         );
     }

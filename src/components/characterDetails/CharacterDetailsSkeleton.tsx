@@ -6,7 +6,7 @@ export const CharacterDetailsSkeleton = () => {
             <Stack direction={{
                 xs: "column",
                 md: "row"
-            }} spacing={2} mb={2}>
+            }} spacing={2} mb={2} aria-label={"character-details-skeleton"}>
                 <Skeleton width={"250px"} height={"250px"} variant={"rounded"} sx={{borderRadius: '14px', alignSelf: "center"}}/>
                 <Stack spacing={"8px"}>
                     <Stack direction={"row"} alignItems={"center"} mb={1} spacing={2}>
