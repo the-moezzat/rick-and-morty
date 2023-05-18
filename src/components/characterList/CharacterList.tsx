@@ -10,7 +10,7 @@ import {useInfiniteScroll} from "../../hooks/useInfiniteScroll";
 import {BasicCharacter} from "../../types/characterTypes";
 import logo from "../../assets/logo.png";
 
-export const Sidebar = () => {
+export const CharacterList = () => {
     const [{status, gender, name, fetching}, {
         handleStatusChange,
         handleNameChange,

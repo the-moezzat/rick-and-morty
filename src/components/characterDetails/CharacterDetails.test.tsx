@@ -1,7 +1,7 @@
 import {render, screen} from "@testing-library/react";
 import {MemoryRouter, useLoaderData} from "react-router-dom";
 import {Provider} from "react-redux";
-import {store, useGetCharacterByIdQuery} from "../../store";
+import {store} from "../../store";
 import {describe, expect, test, vi} from "vitest";
 import {CharacterDetails} from "./CharacterDetails";
 import createServer from "../../test-utils/createServer";

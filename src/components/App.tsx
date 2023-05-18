@@ -1,6 +1,6 @@
 import {Box, useMediaQuery, useTheme} from "@mui/material";
 import {Outlet} from "react-router-dom";
-import {Sidebar} from "./characterList/sidebar";
+import {CharacterList} from "./characterList/CharacterList";
 
 import CharacterDrawer from "./characterDetails/CharacterDrawer";
 
@@ -53,7 +53,7 @@ export default function App() {
                             },
                         }}
                     >
-                        <Sidebar />
+                        <CharacterList />
                     </Box>
                 </Box>
                 {isSmallScreen && (
