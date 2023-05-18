@@ -62,29 +62,30 @@ export const Sidebar = () => {
 
     return (
         <>
-            <Stack direction={"row"} alignItems={"center"}>
-            <img src={logo} alt={logo} height={'54px'} style={{marginBottom: "14px"}}/>
-            <Search onChange={(e) => {
-                handleNameChange(e.target.value);
-                setPage(1);
-                setCharacters([]);
-                handleFetchingChange(true);
-            }}
-                    sx={{mb: {
-                            md:2,
-                            xs: 1
-                        }, backgroundColor: "#fff"}}
-            />
-                </Stack>
+            <Stack direction={"row"} alignItems={"center"} mb={{
+                md: 2,
+                xs: 1
+            }}>
+                <img src={logo} alt={logo} height={"44px"}/>
+                <Search onChange={(e) => {
+                    handleNameChange(e.target.value);
+                    setPage(1);
+                    setCharacters([]);
+                    handleFetchingChange(true);
+                }}
+                        sx={{backgroundColor: "#fff"}}
+                />
+            </Stack>
             <Box
                 sx={{
                     display: "flex",
                     gap: {
-                        md:"18px",
-                    xs: "10px"},
+                        md: "18px",
+                        xs: "10px"
+                    },
                     alignItems: "start",
                     mb: {
-                        md:2,
+                        md: 2,
                         xs: 1
                     },
                 }}
