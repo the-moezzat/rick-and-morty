@@ -2,7 +2,7 @@ import {Grid, useMediaQuery, useTheme} from "@mui/material";
 import {Outlet} from "react-router-dom";
 import {Sidebar} from "./characterList/sidebar";
 
-import CharacterDrawer from "./CharacterDrawer";
+import CharacterDrawer from "./characterDetails/CharacterDrawer";
 
 export default function App() {
     const theme = useTheme();

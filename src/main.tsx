@@ -21,6 +21,7 @@ const router = createBrowserRouter([{
             element: <CharacterDetails/>
         }
     ]
+
 }]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

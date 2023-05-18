@@ -8,6 +8,7 @@ import {useGetCharactersQuery} from "../../store";
 import {useCharacterSearch} from "../../hooks/useCharacterSearch";
 import {useInfiniteScroll} from "../../hooks/useInfiniteScroll";
 import {BasicCharacter} from "../../types/characterTypes";
+import logo from "../../assets/logo.png";
 
 export const Sidebar = () => {
     const [{status, gender, name, fetching}, {
@@ -61,20 +62,8 @@ export const Sidebar = () => {
 
     return (
         <>
-            <Typography variant={"h2"} sx={{
-                fontSize: {
-                    xs: "1.8rem",
-                    md: "2.4rem",
-                                    },
-                mb: {
-                    md: 2,
-                    xs: 1
-                },
-                color: "#212529",
-                fontWeight: "bold",
-            }}>
-                All characters
-            </Typography>
+            <Stack direction={"row"} alignItems={"center"}>
+            <img src={logo} alt={logo} height={'54px'} style={{marginBottom: "14px"}}/>
             <Search onChange={(e) => {
                 handleNameChange(e.target.value);
                 setPage(1);
@@ -86,6 +75,7 @@ export const Sidebar = () => {
                             xs: 1
                         }, backgroundColor: "#fff"}}
             />
+                </Stack>
             <Box
                 sx={{
                     display: "flex",

@@ -1,8 +1,8 @@
-import {LoaderFunction, useLoaderData} from "react-router-dom";
-import {useGetCharacterByIdQuery} from "../../store";
-import {Box, Chip, Grid, Stack, styled, Typography} from "@mui/material";
-import {CharacterDetailsSkeleton} from "./CharacterDetailsSkeleton";
-import {EpisodeTable} from "./EpisodeTable";
+import { LoaderFunction, useLoaderData } from "react-router-dom";
+import { useGetCharacterByIdQuery } from "../../store";
+import { Box, styled, Chip, Grid, Stack, Typography } from "@mui/material";
+import { CharacterDetailsSkeleton } from "./CharacterDetailsSkeleton";
+import { EpisodeTable } from "./EpisodeTable";
 import React from "react";
 
 const ErrMessage = styled(Typography)`
@@ -11,7 +11,7 @@ const ErrMessage = styled(Typography)`
   font-weight: bold;
 `;
 
-const Image = styled("img")(({theme}) => ({
+const Image = styled("img")(({ theme }) => ({
     borderRadius: "18px",
     width: "250px",
     height: "250px",
@@ -22,7 +22,7 @@ const Image = styled("img")(({theme}) => ({
     },
 }));
 
-const SpecTitle = styled(Typography)(({theme}) => ({
+const SpecTitle = styled(Typography)(({ theme }) => ({
     fontSize: "18px",
     fontWeight: "bold",
     color: "#343a40",
@@ -31,7 +31,7 @@ const SpecTitle = styled(Typography)(({theme}) => ({
     },
 }));
 
-const SpecContent = styled(Typography)(({theme}) => ({
+const SpecContent = styled(Typography)(({ theme }) => ({
     fontSize: "18px",
     color: "#495057",
     [theme.breakpoints.down("md")]: {
@@ -39,7 +39,7 @@ const SpecContent = styled(Typography)(({theme}) => ({
     },
 }));
 
-const SpecGroup = styled(Stack)(({theme}) => ({
+const SpecGroup = styled(Stack)(({ theme }) => ({
     flexDirection: "row",
     alignItems: "center",
     gap: "8px",
@@ -48,19 +48,19 @@ const SpecGroup = styled(Stack)(({theme}) => ({
     },
 }));
 
-interface CharacterImageProps {
-    src: string;
+type CharacterImageProps = {
     alt: string;
-}
+    src: string;
+};
 
-const CharacterImage: React.FC<CharacterImageProps> = ({alt, src}) => (
-    <Image alt={alt} src={src}/>
+const CharacterImage: React.FC<CharacterImageProps> = ({ alt, src }) => (
+    <Image alt={alt} src={src} />
 );
 
-interface CharacterDetailsHeaderProps {
+type CharacterDetailsHeaderProps = {
     name: string;
     status: string;
-}
+};
 
 const CharacterDetailsHeader: React.FC<CharacterDetailsHeaderProps> = ({
                                                                            name,
@@ -70,7 +70,7 @@ const CharacterDetailsHeader: React.FC<CharacterDetailsHeaderProps> = ({
         direction="row"
         mb={1}
         spacing={2}
-        alignSelf={{xs: "center", md: "start"}}
+        alignSelf={{ xs: "center", md: "start" }}
         alignItems="center"
     >
         <Typography variant="h4" fontWeight="bold" color="#212529">
@@ -88,16 +88,16 @@ const CharacterDetailsHeader: React.FC<CharacterDetailsHeaderProps> = ({
                         : status === "Dead"
                             ? "#ff6b6b"
                             : "#868e96",
-                fontSize: {md: "16px", xs: "14px"},
+                fontSize: { md: "16px", xs: "14px" },
             }}
         />
     </Stack>
 );
 
-interface CharacterSpecGroupProps {
+type CharacterSpecGroupProps = {
     title: string;
     content: string;
-}
+};
 
 const CharacterSpecGroup: React.FC<CharacterSpecGroupProps> = ({
                                                                    title,
@@ -112,16 +112,16 @@ const CharacterSpecGroup: React.FC<CharacterSpecGroupProps> = ({
 );
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const loader: LoaderFunction = ({params}) => {
-    return {id: params.characterId};
+export const loader: LoaderFunction = ({ params }) => {
+    return { id: params.characterId };
 };
 
 export const CharacterDetails: React.FC = () => {
-    const {id} = useLoaderData() as { id: number };
-    const {data, isFetching, error} = useGetCharacterByIdQuery(id);
+    const { id } = useLoaderData() as { id: number };
+    const { data, isFetching, error } = useGetCharacterByIdQuery(id);
 
     if (isFetching) {
-        return <CharacterDetailsSkeleton/>;
+        return <CharacterDetailsSkeleton />;
     }
 
     if (error) {
@@ -140,20 +140,20 @@ export const CharacterDetails: React.FC = () => {
         );
     }
 
-    const {name, status, image, species, gender, origin, location, type, episode} =
+    const { name, status, image, species, gender, origin, location, type, episode } =
         data;
 
     return (
         <Box>
-            <Stack direction={{xs: "column", md: "row"}} spacing={2} mb={2}>
-                <CharacterImage alt={name} src={image}/>
+            <Stack direction={{ xs: "column", md: "row" }} spacing={2} mb={2}>
+                <CharacterImage alt={name} src={image} />
                 <Stack spacing="8px" alignItems="center">
-                    <CharacterDetailsHeader name={name} status={status}/>
+                    <CharacterDetailsHeader name={name} status={status} />
                     <Grid container columnSpacing={2} rowSpacing={1}>
-                        <CharacterSpecGroup title="Type" content={species}/>
-                        <CharacterSpecGroup title="Gender" content={gender}/>
-                        <CharacterSpecGroup title="Origin" content={origin.name}/>
-                        <CharacterSpecGroup title="Location" content={location.name}/>
+                        <CharacterSpecGroup title="Type" content={species} />
+                        <CharacterSpecGroup title="Gender" content={gender} />
+                        <CharacterSpecGroup title="Origin" content={origin.name} />
+                        <CharacterSpecGroup title="Location" content={location.name} />
                         <CharacterSpecGroup
                             title="Type"
                             content={type || "Unknown"}
@@ -164,7 +164,7 @@ export const CharacterDetails: React.FC = () => {
             <Typography variant="h5" fontWeight="bold" color="#212529" mb={1}>
                 Episodes
             </Typography>
-            <EpisodeTable episodes={episode}/>
+            <EpisodeTable episodes={episode} />
         </Box>
     );
 };

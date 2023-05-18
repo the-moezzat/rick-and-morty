@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event";
 import {BrowserRouter as Router} from "react-router-dom";
 import {CharacterCard} from "./CharacterCard";
 import {test, expect, describe} from "vitest";
+import {Provider} from "react-redux";
+import {store} from "../../store";
 
 const renderComponent = () => {
     const characterId = 15;
@@ -13,6 +15,7 @@ const renderComponent = () => {
     const species = "Human";
 
     render(
+        <Provider store={store}>
         <Router>
             <CharacterCard
                 id={characterId}
@@ -23,6 +26,7 @@ const renderComponent = () => {
                 species={species}
             />
         </Router>
+        </Provider>
     );
     return {
         name,

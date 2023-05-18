@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import {grey} from "@mui/material/colors";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {useDrawer} from "../hooks/useDrawer";
+import {useDrawer} from "../../hooks/useDrawer";
 
 const drawerBleeding = 56;
 
