@@ -165,7 +165,7 @@ export const Sidebar = () => {
                         <CharacterCardSkeleton count={3}/>
                     </>
                 ) : (
-                    <div ref={sentinelRef}></div>
+                    <div ref={sentinelRef}> <CharacterCardSkeleton count={1}/></div>
                 ))}
             </Stack>
         </>

@@ -1,4 +1,4 @@
-import {Grid, useMediaQuery, useTheme} from "@mui/material";
+import {Box, useMediaQuery, useTheme} from "@mui/material";
 import {Outlet} from "react-router-dom";
 import {Sidebar} from "./characterList/sidebar";
 
@@ -10,53 +10,52 @@ export default function App() {
 
     return (
         <>
-            <Grid
-                container
-                maxWidth="144rem"
-                mx="auto"
-                height="100vh"
-                px={{
-                    xs: "0rem", md: "1.4rem",
+            <Box
+                sx={{
+                    display: 'grid',
+                    maxWidth: '1440px',
+                    margin: '0 auto',
+                    alignItems: 'center',
+                    height: '100vh',
+                    px: {md: "14px", xs: 0}
                 }}
-                alignItems="center"
-                justifyContent="center"
             >
-                <Grid
-                    container
-                    columns={16}
-                    item
+                <Box
+                    sx={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(16, 1fr)',
+                        gap: 2,
+                    }}
                 >
                     {!isSmallScreen && (
-                        <Grid md={9} item>
-                            <Outlet/>
-                        </Grid>
+                        <Box sx={{ gridColumn: 'span 9' }}>
+                            <Outlet />
+                        </Box>
                     )}
-                    <Grid
-                        md={isSmallScreen ? 16 : 7}
-                        xs={16}
+                    <Box
                         sx={{
+                            gridColumn: {md: "span 7", xs: "span 16"},
+                            overflowY: 'hidden',
                             borderRadius: {
                                 xs: "0rem",
                                 md: "2.4rem",
                             },
                             height: {
-                                md: "64rem",
+                                md: "640px",
                                 xs: "100vh",
                             },
                             backgroundColor: "#f8f9fa",
                             pt: 2,
-                            pb: 8,
+                            pb: 0,
                             px: {
                                 md: 2,
                                 xs: 0.5
                             },
-
                         }}
-                        item
                     >
-                        <Sidebar/>
-                    </Grid>
-                </Grid>
+                        <Sidebar />
+                    </Box>
+                </Box>
                 {isSmallScreen && (
                     <>
                         <CharacterDrawer>
@@ -65,7 +64,7 @@ export default function App() {
                     </>
                 )}
 
-            </Grid>
+            </Box>
         </>
     );
 }
