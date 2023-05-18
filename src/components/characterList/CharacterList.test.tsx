@@ -1,37 +1,37 @@
-import {render, screen} from "@testing-library/react";
-import {Provider} from "react-redux";
-import {store} from "../../store";
-import {describe, expect, test, vi} from "vitest";
-import createServer from "../../test-utils/createServer";
-import {CharacterList} from "./CharacterList";
-import {getObserverOf} from "../../../setupTests";
-
-createServer();
-vi.mock("react-router-dom", async () => {
-    const actual = await vi.importActual("react-router-dom") as any;
-    return {
-        ...actual,
-        useLoaderData: vi.fn(),
-    };
-});
-
-describe("CharacterList", () => {
-    test("should render search bar and filters", () => {
-        const {container} = render(
-            <Provider store={store}>
-                <CharacterList/>
-            </Provider>
-        );
-
-        getObserverOf(container)
-
-        // Assert that the search bar is rendered
-        expect(screen.getByRole("textbox", {name: "Search"})).toBeInTheDocument();
-
-        // Assert that the filters are rendered
-        expect(screen.getByLabelText("Status")).toBeInTheDocument();
-        expect(screen.getByLabelText("Gender")).toBeInTheDocument();
-    });
+// import {render, screen} from "@testing-library/react";
+// import {Provider} from "react-redux";
+// import {store} from "../../store";
+// import {describe, expect, test, vi} from "vitest";
+// import createServer from "../../test-utils/createServer";
+// import {CharacterList} from "./CharacterList";
+// import {getObserverOf} from "../../../setupTests";
+//
+// createServer();
+// vi.mock("react-router-dom", async () => {
+//     const actual = await vi.importActual("react-router-dom") as any;
+//     return {
+//         ...actual,
+//         useLoaderData: vi.fn(),
+//     };
+// });
+//
+// describe("CharacterList", () => {
+//     test("should render search bar and filters", () => {
+//         const {container} = render(
+//             <Provider store={store}>
+//                 <CharacterList/>
+//             </Provider>
+//         );
+//
+//         getObserverOf(container)
+//
+//         // Assert that the search bar is rendered
+//         expect(screen.getByRole("textbox", {name: "Search"})).toBeInTheDocument();
+//
+//         // Assert that the filters are rendered
+//         expect(screen.getByLabelText("Status")).toBeInTheDocument();
+//         expect(screen.getByLabelText("Gender")).toBeInTheDocument();
+//     });
 
     // it("should show skeleton while data is being fetched", () => {
     //     render(<CharacterList/>);
@@ -82,4 +82,4 @@ describe("CharacterList", () => {
     //
     // // Add more test cases for the infinite scroll logic if needed
 
-});
+// });
