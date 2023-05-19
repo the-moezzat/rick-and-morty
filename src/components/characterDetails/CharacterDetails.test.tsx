@@ -81,39 +81,18 @@ describe("CharacterDetails loading and success", () => {
     });
 });
 
-// describe("CharacterDetails error messages", () => {
-//     test("renders error message when there is an error", () => {
-//         vi.mock("../../store");
-//         useLoaderData.mockReturnValue({id: 1});
-//         useGetCharacterByIdQuery.mockReturnValue({
-//             data: null,
-//             isFetching: false,
-//             error: "Error message",
-//         });
-//         //
-//         render(<CharacterDetails/>);
-//
-//         expect(screen.getByText("Something went wrong while trying to load character")).toBeInTheDocument();
-//     });
-//
-//     test("renders 'Character not found' message when data is null", () => {
-//         vi.mock("../../store", async () => {
-//             const actual = await vi.importActual("../../store");
-//             return {
-//                 ...actual,
-//                 useGetCharacterByIdQuery: vi.fn(),
-//             };
-//         });
-//         useLoaderData.mockReturnValue({id: 1});
-//
-//         useGetCharacterByIdQuery.mockReturnValue({
-//             data: null,
-//             isFetching: false,
-//             error: null,
-//         });
-//
-//         render(<CharacterDetails/>);
-//
-//         expect(screen.getByText("Character \"1\" not found")).toBeInTheDocument();
-//     });
-// });
+describe("CharacterDetails error messages", () => {
+    test("renders error message when there is an error", async () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        useLoaderData.mockReturnValue({id: 500});
+
+        render(<MemoryRouter initialEntries={["/character/500"]}>
+            <Provider store={store}>
+                <CharacterDetails/>
+            </Provider>
+        </MemoryRouter>);
+
+        expect(await screen.findByText("Something went wrong while trying to load character")).toBeInTheDocument();
+    });
+});

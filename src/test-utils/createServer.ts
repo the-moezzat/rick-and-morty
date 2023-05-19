@@ -31,6 +31,12 @@ export default function createServer() {
                 );
             }
 
+            if (request.query.includes('id: 500')) {
+                return res(
+                    ctx.status(404)
+                )
+            }
+
             if (request.query.includes('character')) {
                 return res(
                     ctx.json({
