@@ -4,7 +4,7 @@ import {Dropdown} from "./Dropdown";
 import {CharacterCardSkeleton} from "../characterCard/CharacterCardSkeleton";
 import {CharacterCard} from "../characterCard/CharacterCard";
 import {useEffect, useRef, useState} from "react";
-import {useGetCharactersQuery} from "../../store";
+import {useGetCharactersGraphQuery, useGetCharactersQuery} from "../../store";
 import {useCharacterSearch} from "../../hooks/useCharacterSearch";
 import {useInfiniteScroll} from "../../hooks/useInfiniteScroll";
 import {BasicCharacter} from "../../types/characterTypes";
@@ -25,12 +25,26 @@ export const CharacterList = () => {
         isFetching,
         error,
         isLoading,
-    } = useGetCharactersQuery({
+    } = useGetCharactersGraphQuery({
         page,
         name,
         gender,
         status,
     });
+
+    // const {
+    //     data: charactersGraphData,
+    //     isFetching: fetchingGraph,
+    //     error: errorGraph,
+    //     isLoading: loadingGraph,
+    // } = useGetCharactersGraphQuery({
+    //     page,
+    //     name,
+    //     gender,
+    //     status,
+    // });
+    //
+    // (fetchingGraph)? console.log("fetching"): console.log(charactersGraphData);
 
     const next = charactersData && charactersData.info.next;
     const data = charactersData?.results || [];
