@@ -1,20 +1,8 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { request, gql, ClientError } from 'graphql-request'
 import {Characters, CompleteCharacter} from "../../types/characterTypes";
 
 const BASE_URL = "https://rickandmortyapi.com/graphql";
-
-
-type ReturnCharacters = {
-    data: {
-        characters: Characters
-    };
-}
-
-type ReturnCharacterById = {
-    data: {
-        character: CompleteCharacter;
-    };
-}
 
 type GetCharacterParams = {
     name: string;
@@ -23,20 +11,28 @@ type GetCharacterParams = {
     page: number;
 };
 
-// Define your API using createApi
-const characterApi = createApi({
+const graphqlBaseQuery = ({ baseUrl }: { baseUrl: string }) =>
+    async ({ body }: { body: string }) => {
+        try {
+            const result = await request(baseUrl, body)
+            return { data: result }
+        } catch (error) {
+            if (error instanceof ClientError) {
+                return { error: { status: error.response.status, data: error } }
+            }
+            return { error: { status: 500, data: error } }
+        }
+    }
+
+export const characterApi = createApi({
     reducerPath: "rickAndMortyApi",
-    baseQuery: fetchBaseQuery({
+    baseQuery: graphqlBaseQuery({
         baseUrl: BASE_URL,
     }),
     endpoints: (builder) => ({
         getCharacters: builder.query<Characters, GetCharacterParams>({
-            query: (params) => {
-                return {
-                    url: "",
-                    method: "POST",
-                    body: {
-                        query: `
+            query: (params) => ({
+                body: gql`
             {
               characters(page: ${params.page} , filter:{name: "${params.name}",  status: "${params.status}", gender: "${params.gender}"}) {
                 info{
@@ -53,20 +49,14 @@ const characterApi = createApi({
                 }
               }
             }`,
-                    },
-                };
-            },
-            transformResponse: (response: ReturnCharacters) => {
-                return response.data.characters;
+            }),
+            transformResponse: (response: { characters: Characters }) => {
+                return response.characters;
             },
         }),
         getCharacterById: builder.query<CompleteCharacter, number>({
-            query: (id) => {
-                return {
-                    url: "",
-                    method: "POST",
-                    body: {
-                        query: `
+            query: (id) => ({
+                body: gql`
             {
               character(id: ${id}) {
                 id
@@ -90,15 +80,13 @@ const characterApi = createApi({
                 }
               }
             }`,
-                    },
-                };
-            },
-            transformResponse: (response: ReturnCharacterById) => {
-                return response.data.character;
+            }),
+            transformResponse: (response: { character: CompleteCharacter }) => {
+                return response.character;
             },
         }),
     }),
-});
+})
 
 export default characterApi;
 export const {useGetCharactersQuery, useGetCharacterByIdQuery} = characterApi;
